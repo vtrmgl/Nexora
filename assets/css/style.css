@@ -37,16 +37,10 @@ body{
     color: antiquewhite;
 }
 .topo a .logo img{
-    width: 60.34px;
-    height: 70.07px;
+    width: 180px;
 }
 .topo a{
     text-decoration: none;
-}
-.topo a .logo span{
-    padding: 10px;
-    font-size: 16px;
-    text-align: left;
 }
 
 .pesquisa{
@@ -425,8 +419,7 @@ main{
     gap: 50px;
 }
 .conjunto-principal-sobre img{
-    width: 258.6px;
-    height: 300.3px;
+    width: 400px;
 }
 .texto-conjunto-principal-sobre{
     color: #410200;
