@@ -7,77 +7,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="topo">
-            <a href="inicio.html">
-                <div class="logo">
-                    <img src="img/logo-completa-nexora.svg" alt="logo-Nexora">
-                </div>
-            </a>
-            <div class="pesquisa">
-                <input type="search" id="barra-pesquisa" placeholder="Pesquisa">
-                <div class="pesquisa-dropdown">
-                    <div class="secao-pesquisa">
-                        <h3>Visto recentemente</h3>
-                        <ul>
-                            <li><a href="produtos.html@mouses">Mouses</a></li>
-                            <li><a href="produtos.html@monitores">Monitores</a></li>
-                            <li><a href="produtos.html@gabinetes">Gabinetes</a></li>
-                        </ul>
-                    </div>
-                    <hr>
-                    <div class="secao-pesquisa">
-                        <h3>Categorias</h3>
-                        <div class="colunas-categorias-pesquisa">
-                            <ul>
-                                <li><a href="produtos.html#novidade">Novidades</a></li>
-                                <li><a href="produtos.html#ofertas">Ofertas</a></li>
-                                <li><a href="produtos.html#processadores">Processadores</a></li>
-                            </ul>
-                            <ul>
-                                <li><a href="produtos.html#placas-de-video">Placas de Vídeo</a></li>
-                                <li><a href="produtos.html#memorias-ram">Memorias RAM</a></li>
-                                <li><a href="produtos.html#ssds">SSDs</a></li>
-                            </ul>
-                            <ul>
-                                <li><a href="produtos.html#coolers">Coolers</a></li>
-                                <li><a href="produtos.html#placas-mae">Placas Mãe</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!--
-            Logout e perfil só devem aparecer se a sessão estiver ativa, dashboard só aparece se o usuário tiver uma loja.
-            Login só aparece se a sessão não estiver ativa
-             -->
-
-            <nav>
-                <a href="inicio.html" title="Início">
-                    <img src="img/home.svg" alt="Início" class="icone-cabecalho">
-                </a>
-                <a href="perfil.html" title="Perfil">
-                    <img src="img/person.svg" alt="Perfil" class="icone-cabecalho">
-                </a>
-                <a href="dashboard.html" title="Dashboard">
-                    <img src="img/dashboard.svg" alt="Dashboard" class="icone-cabecalho">
-                </a>
-                <a href="login.html" title="Login">
-                    <img src="img/login.svg" alt="Login" class="icone-cabecalho">
-                </a>
-                <a href="index.php" title="Logout">
-                    <img src="img/logout.svg" alt="Logout" class="icone-cabecalho">
-                </a>
-                <a href="sobre.html" title="Sobre">
-                    <img src="img/info.svg" alt="Sobre" class="icone-cabecalho">
-                </a>
-                <a href="contato.html" title="Contato">
-                    <img src="img/envelope.svg" alt="Contato" class="icone-cabecalho">
-                </a>
-            </nav>
-        </div>
-    </header>
+    <?php include 'paginas/header.php' ?>
 
     <main>
         <h1>Mais Vendidos</h1>
@@ -405,33 +336,7 @@
         </div>
     </main>
 
-    <footer class="rodape">
-        <div class="rodape-grid">
-            <div class="coluna">
-                <h3>Nexora</h3>
-                <p>Projeto simulando uma loja virtual de informáticas. Criado para aprofundar os fundamentos em HTML, CSS, JavaScript, PHP e Mysql</p>
-            </div>
-            <div class="coluna">
-                <h3>Navegação</h3>
-                <nav>
-                    <ul>
-                        <li><a href="inicio.html">Início</a></li>
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <li><a href="contato.html">Contato</a></li>
-                        <li><a href="sobre.html">Sobre</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="coluna">
-                <h3>Endereço</h3>
-                <p>Rua Core I5, 1235u</p>
-                <p>Recife - PE</p>
-                <p>4002-8922</p>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>Nexora - Vitor Miguel</p>
-        </div>
-    </footer>
+    <?php include 'paginas/footer.php' ?>
+    
 </body>
 </html>

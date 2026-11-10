@@ -28,15 +28,12 @@ body{
     width: 100%;
     box-sizing: border-box;
 }
-.topo a .logo{
-    display: flex;
-    flex-direction: row;
-    margin-left: 50px;
+.topo .logo{
+    margin-left: 15px;
     align-items: center;
     text-decoration: none;
-    color: antiquewhite;
 }
-.topo a .logo img{
+.topo .logo img{
     width: 180px;
 }
 .topo a{
@@ -272,7 +269,6 @@ main{
 }
 .formulario-cadastro input[type="submit"]{
     margin-top: 20px;
-    margin-bottom: 20px;
     padding: 10px 20px;
     width: 100%;
     cursor: pointer;
