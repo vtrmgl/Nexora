@@ -250,7 +250,7 @@ main{
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.formulario-cadastro input[type="email"], .formulario-cadastro input[type="password"], .formulario-cadastro input[type="text"]{
+.formulario-cadastro input[type="email"], .formulario-cadastro input[type="password"], .formulario-cadastro .container-senha input, .formulario-cadastro input[type="text"]{
     padding: 8px;
     margin-bottom: 5px;
     width: 100%;
@@ -289,7 +289,7 @@ main{
     opacity: 0.5;
     
 }
-.formulario-cadastro input[type="password"]:focus, input[type="email"]:focus, input[type="text"]:focus, .telefone-datanascimento-cadastro div input:focus, .nome-sobrenome-cadastro div input:focus{
+.formulario-cadastro .container-senha input:focus, .formulario-cadastro input[type="password"]:focus, input[type="email"]:focus, input[type="text"]:focus, .telefone-datanascimento-cadastro div input:focus, .nome-sobrenome-cadastro div input:focus{
     border: 2px solid #FEA613;
     outline: none;
 }
@@ -303,6 +303,34 @@ main{
 }
 .formulario-cadastro p a:hover{
     color: #D9381E;
+}
+.container-senha {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.container-senha input {
+  padding-right: 35px !important;
+}
+
+#mostrar-senha {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#icone-olho {
+  width: 20px;
+  height: auto;
 }
 
 /* Início */

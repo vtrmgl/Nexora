@@ -1,13 +1,13 @@
 /* Validação do formulário de login */
 
-const formLogin = document.querySelector("#formulario-login");
+const formLogin = document.getElementById("#formulario-login");
 
 if(formLogin){
     formLogin.addEventListener('submit', function(event){
         event.preventDefault();
 
-        const email = document.querySelector('#email').value.trim();
-        const senha = document.querySelector('#senha').value;
+        const email = document.getElementById('#email').value.trim();
+        const senha = document.getElementById('#senha').value;
 
         if(email === '' || senha === ''){
             alert('Por favor, preencha todos os campos');
@@ -25,20 +25,20 @@ if(formLogin){
 
 /* Validação do formulário de cadastro */
 
-const formCadastro = document.querySelector("#formulario-cadastro");
+const formCadastro = document.getElementById("#formulario-cadastro");
 
 if(formCadastro){
     formCadastro.addEventListener('submit', function(event){
         event.preventDefault();
 
-        const nome = document.querySelector('#nome').value.trim();
-        const sobrenome = document.querySelector('#sobrenome').value.trim();
-        let telefone = document.querySelector('#telefone').value;
-        const dataDeNascimento = document.querySelector('#data-nascimento').value;
-        let cpf = document.querySelector('#cpf').value;
-        const email = document.querySelector('#email').value.trim();
-        const senha = document.querySelector('#senha').value;
-        const conSenha = document.querySelector('#conf-senha').value;
+        const nome = document.getElementById('#nome').value.trim();
+        const sobrenome = document.getElementById('#sobrenome').value.trim();
+        let telefone = document.getElementById('#telefone').value;
+        const dataDeNascimento = document.getElementById('#data-nascimento').value;
+        let cpf = document.getElementById('#cpf').value;
+        const email = document.getElementById('#email').value.trim();
+        const senha = document.getElementById('#senha').value;
+        const conSenha = document.getElementById('#conf-senha').value;
 
         telefone = telefone.replace(/\D/g, '');
         cpf = cpf.replace(/\D/g, '')
@@ -73,16 +73,16 @@ if(formCadastro){
 
 /* Validação do formulário de Contato */
 
-const formContato = document.querySelector("#form-contato");
+const formContato = document.getElementById("#form-contato");
 
 if(formContato){
     formContato.addEventListener('submit', function(event){
         event.preventDefault();
 
-        const nome = document.querySelector('#nome').value.trim();
-        const email = document.querySelector('#email').value.trim();
-        const assunto = document.querySelector('#assunto').value.trim();
-        const mensagem = document.querySelector('#mensagem').value.trim();
+        const nome = document.getElementById('#nome').value.trim();
+        const email = document.getElementById('#email').value.trim();
+        const assunto = document.getElementById('#assunto').value.trim();
+        const mensagem = document.getElementById('#mensagem').value.trim();
 
         if(!nome || !email || !assunto || !mensagem){
             alert('Por favor, preencha todos os campos');
@@ -94,3 +94,19 @@ if(formContato){
         window.location.href = 'inicio.html';
     });
 };
+
+/* Botão mostrar senha */
+
+const inputSenha = document.getElementById('senha');
+const mostrarSenha = document.getElementById('mostrar-senha');
+const iconeOlho = document.getElementById('icone-olho');
+
+mostrarSenha.addEventListener('click', () => {
+    if(inputSenha.type === 'password'){
+        inputSenha.type = 'text';
+        iconeOlho.src = 'img/olho_aberto.svg'
+    }else{
+        inputSenha.type = 'password';
+        iconeOlho.src = 'img/olho_fechado.svg'
+    }
+});
