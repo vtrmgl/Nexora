@@ -17,9 +17,11 @@
                 <Label for="email">Email</Label>
                 <input type="email" placeholder="nome@exemplo" maxlength="255" id="email">
             </div>
-            <div class="campo-input">
-                <label for="senha">Senha</label>
+            <div class="campo-senha">
                 <input type="password" placeholder="********" maxlength="255" id="senha">
+                <button type="button" id="mostrar-senha">
+                    <img src="img/olho_fechado.svg" alt="icone-olho" id="icone-olho">
+                </button>
             </div>
             <input type="submit" value="Login" id="login">
             <p>Não tem uma conta? <a href="cadastro.php">Cadastre-se</a></p>
