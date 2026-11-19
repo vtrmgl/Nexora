@@ -13,10 +13,14 @@
     <main>
         <form class="formulario-login" id="formulario-login">
             <h1>Login</h1>
-            <Label for="email">Email</Label>
-            <input type="email" placeholder="nome@exemplo" id="email">
-            <label for="senha">Senha</label>
-            <input type="password" placeholder="********" id="senha">
+            <div class="campo-input">
+                <Label for="email">Email</Label>
+                <input type="email" placeholder="nome@exemplo" maxlength="255" id="email">
+            </div>
+            <div class="campo-input">
+                <label for="senha">Senha</label>
+                <input type="password" placeholder="********" maxlength="255" id="senha">
+            </div>
             <input type="submit" value="Login" id="login">
             <p>Não tem uma conta? <a href="cadastro.php">Cadastre-se</a></p>
         </form>
