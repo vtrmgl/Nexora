@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18/11/2026 às 15:27
+-- Tempo de geração: 20/11/2026 às 01:31
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -230,6 +230,7 @@ CREATE TABLE `usuarios` (
   `sobrenome` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
+  `tipo` enum('Usuário','Administrador') NOT NULL DEFAULT 'Usuário',
   `cpf` char(11) NOT NULL,
   `telefone` varchar(11) NOT NULL,
   `data_de_nascimento` date NOT NULL,
