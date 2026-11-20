@@ -1,3 +1,8 @@
+<?php
+    require_once 'assets/php/functions.php';
+    iniciarSessaoSegura();
+?>
+
 <header>
     <div class="topo">
         <a href="inicio.php" class="logo">
@@ -42,21 +47,19 @@
         Login só aparece se a sessão não estiver ativa
             -->
 
+        <?php 
+            /**
+             * Exibe os atalhos da conta apenas para usuários autenticados, evitando
+             * redirecionamentos desnecessários para a tela de login.
+             *
+             * @todo Restringir a exibição do link "Dashboard" apenas para usuários que possuam loja cadastrada.
+             * @author Vitor Miguel
+             */
+        ?>
+
         <nav>
             <a href="inicio.php" title="Início">
                 <img src="img/home.svg" alt="Início" class="icone-cabecalho">
-            </a>
-            <a href="perfil.php" title="Perfil">
-                <img src="img/person.svg" alt="Perfil" class="icone-cabecalho">
-            </a>
-            <a href="dashboard.php" title="Dashboard">
-                <img src="img/dashboard.svg" alt="Dashboard" class="icone-cabecalho">
-            </a>
-            <a href="login.php" title="Login">
-                <img src="img/login.svg" alt="Login" class="icone-cabecalho">
-            </a>
-            <a href="index.php" title="Logout">
-                <img src="img/logout.svg" alt="Logout" class="icone-cabecalho">
             </a>
             <a href="sobre.php" title="Sobre">
                 <img src="img/info.svg" alt="Sobre" class="icone-cabecalho">
@@ -64,6 +67,25 @@
             <a href="contato.php" title="Contato">
                 <img src="img/envelope.svg" alt="Contato" class="icone-cabecalho">
             </a>
+            
+            <?php if(usuarioEstaLogado()): ?>
+            <a href="perfil.php" title="Perfil">
+                <img src="img/person.svg" alt="Perfil" class="icone-cabecalho">
+            </a>
+            <a href="dashboard.php" title="Dashboard">
+                <img src="img/dashboard.svg" alt="Dashboard" class="icone-cabecalho">
+            </a>
+            <a href="carrinho.php" title="Carrinho">
+                <img src="img/carrinho.svg" alt="Carrinho" class="icone-cabecalho">
+            </a>
+            <a href="index.php" title="Logout">
+                <img src="img/logout.svg" alt="Logout" class="icone-cabecalho">
+            </a>
+            <?php else: ?>
+                <a href="login.php" title="Login">
+                    <img src="img/login.svg" alt="Login" class="icone-cabecalho">
+                </a>
+            <?php endif; ?>
         </nav>
     </div>
 </header>

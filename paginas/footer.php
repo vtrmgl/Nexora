@@ -1,3 +1,8 @@
+<?php
+    require_once 'assets/php/functions.php';
+    iniciarSessaoSegura();
+?>
+
 <footer class="rodape">
     <div class="rodape-grid">
         <div class="coluna">
@@ -9,9 +14,14 @@
             <nav>
                 <ul>
                     <li><a href="inicio.php">Início</a></li>
-                    <li><a href="dashboard.php">Dashboard</a></li>
                     <li><a href="contato.php">Contato</a></li>
                     <li><a href="sobre.php">Sobre</a></li>
+                    <?php if(usuarioEstaLogado()): ?>
+                    <li><a href="perfil.php">Perfil</a></li>
+                    <li><a href="dashboard.php">Dashboard</a></li>
+                    <?php else: ?>
+                    <li><a href="login.php">Login</a></li>
+                    <?php endif; ?>
                 </ul>
             </nav>
         </div>
