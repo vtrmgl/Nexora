@@ -10,6 +10,8 @@
 
 * **Resultado:** `[x] Atendeu` `[ ] Atendeu parcialmente` `[ ] Pendente` | **Evidência:** `docs/evidencias/p01-protecao-rotas.png`, `docs/telas-e-fluxos.md` e `docs/banco-de-dados.md`.
 
+  ![Proteção de rotas e perfil](evidencias/p01-protecao-rotas.png)
+
 * **Pendências:** Atualizar o mapa textual em `docs/telas-e-fluxos.md` para incluir explicitamente os campos de setor/perfil no cadastro e a tabela de gestão de usuários no dashboard.
 
 ## PONTO 02 — Estrutura MySQL, relacionamentos e integridade
@@ -21,6 +23,9 @@
 * **Teste de erro / limite:** Tentativa de `INSERT` direto no MySQL com e-mail já existente (`admin@nexora.com`) e chave estrangeira inexistente (`id_setor = 999`), bloqueados pelas restrições `UNIQUE` e `FOREIGN KEY` do banco.
 
 * **Resultado:** `[x] Atendeu` `[ ] Atendeu parcialmente` `[ ] Pendente` | **Evidência:** `docs/evidencias/p02-estrutura-relacionamentos.png` e `docs/evidencias/p02-erro-integridade.png`.
+
+  ![Estrutura e relacionamentos SQL](evidencias/p02-estrutura-relacionamentos.png)
+  ![Bloqueio de integridade no MySQL](evidencias/p02-erro-integridade.png)
 
 * **Pendências:** O modelo adotou o par `status = 'Ativo'/'Inativo'` e `desativado_em` no lugar de `'Baixa'`/`baixado_em` sugeridos como referência; `sprint01.sql` exige execução sobre base `nexora.sql` recém-importada por conter `ALTER TABLE ADD COLUMN`.
 
@@ -34,6 +39,8 @@
 
 * **Resultado:** `[x] Atendeu` `[ ] Atendeu parcialmente` `[ ] Pendente` | **Evidência:** `docs/evidencias/p03-falha-pdo.png` e `config/conexao.php`.
 
+  ![Tratamento controlado de falha PDO](evidencias/p03-falha-pdo.png)
+
 * **Pendências:** Nenhuma.
 
 ## PONTO 04 — Consulta às tabelas relacionadas no formulário
@@ -44,7 +51,10 @@
 
 * **Teste de erro / limite:** Verificação do tratamento condicional para listas vazias (`if (empty($setores))` e `if (empty($perfis))`), exibindo opção desabilitada informativa sem quebrar a renderização do formulário.
 
-* **Resultado:** `[x] Atendeu` `[ ] Atendeu parcialmente` `[ ] Pendente` | **Evidência:** `docs/evidencias/p04-selects-banco.png`.
+* **Resultado:** `[x] Atendeu` `[ ] Atendeu parcialmente` `[ ] Pendente` | **Evidência:** `docs/evidencias/p04-selects-banco-setor.png` e `docs/evidencias/p04-selects-banco-perfil.png`.
+
+  ![Select de Setor carregado do banco](evidencias/p04-selects-banco-setor.png)
+  ![Select de Perfil carregado do banco](evidencias/p04-selects-banco-perfil.png)
 
 * **Pendências:** Nenhuma.
 
@@ -58,6 +68,8 @@
 
 * **Resultado:** `[x] Atendeu` `[ ] Atendeu parcialmente` `[ ] Pendente` | **Evidência:** `docs/evidencias/p05-validacao-servidor.png`.
 
+  ![Validação no servidor e preservação de dados](evidencias/p05-validacao-servidor.png)
+
 * **Pendências:** A validação no servidor exibe uma mensagem única consolidada no topo do formulário em vez de mensagens individuais abaixo de cada campo.
 
 ## PONTO 06 — INSERT real e resposta do cadastro
@@ -69,6 +81,10 @@
 * **Teste de erro / limite:** Tentativa de cadastro com e-mail já existente (`bigas@teste.com`, teste `T03`) e com ID de setor/perfil inexistente (teste `T04`), rejeitados sem duplicar registros e sem expor mensagens SQL técnicas.
 
 * **Resultado:** `[x] Atendeu` `[ ] Atendeu parcialmente` `[ ] Pendente` | **Evidência:** `docs/evidencias/p06-erro-duplicidade.png`, `docs/evidencias/p06-cadastro-sucesso.png` e `docs/evidencias/p06-banco-persistencia.png`.
+
+  ![Bloqueio de duplicidade no cadastro](evidencias/p06-erro-duplicidade.png)
+  ![Cadastro realizado com sucesso](evidencias/p06-cadastro-sucesso.png)
+  ![Persistência comprovada no MySQL](evidencias/p06-banco-persistencia.png)
 
 * **Pendências:** Nenhuma.
 
@@ -82,6 +98,10 @@
 
 * **Resultado:** `[x] Atendeu` `[ ] Atendeu parcialmente` `[ ] Pendente` | **Evidência:** `docs/evidencias/p07-p08-listagem-join.png`, `docs/evidencias/p07-busca-encontrada.png` e `docs/evidencias/p07-busca-vazia-segura.png`.
 
+  ![Listagem dinâmica de usuários ativos](evidencias/p07-p08-listagem-join.png)
+  ![Pesquisa por nome ou e-mail existente](evidencias/p07-busca-encontrada.png)
+  ![Pesquisa vazia e proteção contra SQL Injection](evidencias/p07-busca-vazia-segura.png)
+
 * **Pendências:** Nenhuma.
 
 ## PONTO 08 — JOIN entre usuários, setores e perfis
@@ -93,6 +113,9 @@
 * **Teste de erro / limite:** Alteração do nome de um setor diretamente na tabela `setores` (`id = 3`, teste `T07`), comprovando que a interface passa a exibir o novo nome automaticamente via `JOIN` sem redundância nem alteração na tabela `usuarios`.
 
 * **Resultado:** `[x] Atendeu` `[ ] Atendeu parcialmente` `[ ] Pendente` | **Evidência:** `docs/evidencias/p07-p08-listagem-join.png` e `docs/evidencias/p08-join-atualizado.png`.
+
+  ![Exibição relacional com INNER JOIN](evidencias/p07-p08-listagem-join.png)
+  ![Atualização automática via JOIN após alteração de referência](evidencias/p08-join-atualizado.png)
 
 * **Pendências:** Nenhuma.
 
@@ -106,6 +129,8 @@
 
 * **Resultado:** `[x] Atendeu` `[ ] Atendeu parcialmente` `[ ] Pendente` | **Evidência:** `docs/evidencias/p09-modal-confirmacao.png`.
 
+  ![Modal de confirmação antes de excluir](evidencias/p09-modal-confirmacao.png)
+
 * **Pendências:** Nenhuma.
 
 ## PONTO 10 — Exclusão segura, auditoria e entrega integrada
@@ -117,6 +142,9 @@
 * **Teste de erro / limite:** Tentativa de exclusão via `GET` na URL, envio de `POST` com token CSRF inválido (`T10`) e repetição da confirmação para usuário já desativado (`T11`), todos bloqueados com mensagens controladas e preservação dos dados no banco.
 
 * **Resultado:** `[x] Atendeu` `[ ] Atendeu parcialmente` `[ ] Pendente` | **Evidência:** `docs/evidencias/p10-exclusao-auditoria.png` e `docs/evidencias/p10-bloqueio-csrf.png`.
+
+  ![Exclusão lógica e registro de auditoria](evidencias/p10-exclusao-auditoria.png)
+  ![Bloqueio de operação com token CSRF inválido](evidencias/p10-bloqueio-csrf.png)
 
 * **Pendências:** Nomenclatura de status adotada como `'Inativo'`/`desativado_em` no lugar de `'Baixa'`/`baixado_em`; páginas externas ao escopo da Sprint 01 (`carrinho.php`, `contato.php` e catálogo dinâmico) seguem planejadas no `CHANGELOG.md`.
 
