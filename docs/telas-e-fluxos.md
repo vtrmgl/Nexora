@@ -26,7 +26,7 @@ Além das páginas principais, o Nexora possui arquivos compartilhados que auxil
 | `index.php` | Atua como ponto de entrada e roteador inicial do sistema: verifica se existe sessão ativa e redireciona para `perfil.php` (se logado) ou `inicio.php` (se visitante). |
 | `assets/css/style.css` | Contém toda a estilização visual, grids de produtos, formulários e layout responsivo das páginas do Nexora. |
 | `assets/js/formularios.js` | Controla as interações e validações no navegador dos formulários de cadastro, login e contato (como exibir/ocultar senha). |
-| `assets/php/funcoes.php` | Centraliza funções auxiliares reutilizáveis do sistema: inicia a sessão PHP sem duplicidade (`iniciarSessaoSegura()`), verifica se há usuário autenticado (`usuarioEstaLogado()`) e executa redirecionamentos entre páginas (`redirecionar()`). |
+| `assets/php/functions.php` | Centraliza funções auxiliares reutilizáveis do sistema: inicia a sessão PHP sem duplicidade (`iniciarSessaoSegura()`), verifica se há usuário autenticado (`usuarioEstaLogado()`) e executa redirecionamentos entre páginas (`redirecionar()`). |
 
 ## 3. Arquivos que processam dados
 

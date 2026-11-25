@@ -21,14 +21,21 @@ Sistema web de marketplace de informática. Peça seus produtos tecnológicos em
 
 ## Como rodar
 1. Instale o XAMPP e ligue Apache e MySQL.
-2. Copie a pasta `cantinaweb` para `C:\xampp\htdocs`.
+2. Copie a pasta `Nexora` para `C:\xampp\htdocs`.
 3. No phpMyAdmin, importe `database/nexora.sql`.
-4. Acesse http://localhost/Nexora
+4. Cole o conteúdo da pasta `database/sprint01.sql` na aba SQL em `nexora`.
+5. Acesse http://localhost/Nexora
 Passos detalhados em `docs/instalacao.md`.
 
 ## Usuário de teste
-- E-mail: user@teste.com
-- Senha: 12345678
+- E-mail: admin@nexora.com
+- Senha: password
+- E-mail: vtr@teste.com
+- Senha: password
+- E-mail: bigas@teste.com
+- Senha: password
+- E-mail: 22co@teste.com
+- Senha: password
 
 ## Documentação
 - Requisitos: [docs/requisitos.md](docs/requisitos.md)
@@ -37,6 +44,3 @@ Passos detalhados em `docs/instalacao.md`.
 
 ## Equipe
 - Vitor Miguel: front-end, back-end, banco de dados e documentação
-
-Projeto do curso técnico em Desenvolvimento de Sistemas —
-ETE Porto Digital, 2026.

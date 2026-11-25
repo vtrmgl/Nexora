@@ -63,7 +63,7 @@ CREATE TABLE `cupons` (
   `data_validade` datetime NOT NULL,
   `limite_usos` int(11) DEFAULT NULL,
   `usos_atuais` int(11) DEFAULT 0 CHECK (`usos_atuais` >= 0),
-  `ativo` tinyint(1) DEFAULT 1,
+  `ativo` enum('Ativo','Inativo') NOT NULL DEFAULT 'Ativo',
   `data_criacao` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -145,7 +145,7 @@ CREATE TABLE `lojas` (
   `banner` varchar(255) DEFAULT NULL,
   `avaliacao` decimal(3,2) DEFAULT NULL,
   `data_criacao` datetime NOT NULL DEFAULT current_timestamp(),
-  `ativa` tinyint(1) NOT NULL DEFAULT 1
+  `ativa` enum('Ativa','Inativa') NOT NULL DEFAULT 'Ativa'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

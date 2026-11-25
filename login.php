@@ -4,44 +4,53 @@
 
     iniciarSessaoSegura();
 
-    if(usuarioEstaLogado()){
+    if (usuarioEstaLogado()) {
         redirecionar('inicio.php');
     }
 
     $erro = '';
     $sucesso = $_SESSION['sucesso_cadastro'] ?? '';
     unset($_SESSION['sucesso_cadastro']);
+    $email = '';
 
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = trim($_POST['email'] ?? '');
         $senha = $_POST['senha'] ?? '';
 
-        if($email === '' || $senha === ''){
+        if ($email === '' || $senha === '') {
             $erro = 'Por favor, preencha todos os campos.';
-        }else{
-            $stmt = $pdo->prepare('SELECT id, nome, sobrenome, email, senha FROM usuarios WHERE email = :email LIMIT 1');
+        } else {
+            $sql = 'SELECT u.id, u.nome, u.sobrenome, u.email, u.senha, u.tipo, u.status,
+                           l.id AS id_loja, l.nome AS nome_loja
+                    FROM usuarios u
+                    LEFT JOIN lojas l ON l.id_usuario = u.id AND l.ativa = "Ativa"
+                    WHERE u.email = :email
+                    LIMIT 1';
+
+            $stmt = $pdo->prepare($sql);
             $stmt->execute([':email' => $email]);
             $usuario = $stmt->fetch();
 
-            if ($usuario && password_verify($senha, $usuario['senha'])) {
+            if ($usuario && $usuario['status'] === 'Ativo' && password_verify($senha, $usuario['senha'])) {
                 session_regenerate_id(true);
 
                 $_SESSION['usuario'] = [
-                    'id' => $usuario['id'],
+                    'id' => (int)$usuario['id'],
                     'nome' => $usuario['nome'],
                     'sobrenome' => $usuario['sobrenome'],
-                    'email' => $usuario['email']
+                    'email' => $usuario['email'],
+                    'tipo' => $usuario['tipo'],
+                    'id_loja' => $usuario['id_loja'] ? (int)$usuario['id_loja'] : null,
+                    'nome_loja' => $usuario['nome_loja'] ?? null
                 ];
 
                 redirecionar('inicio.php');
             } else {
-                $erro = 'E-mail ou senha incorretos.';
+                $erro = 'E-mail e/ou senha incorretos, ou conta inativa.';
             }
         }
     }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -59,16 +68,16 @@
             <h1>Login</h1>
 
             <?php if ($sucesso !== ''): ?>
-                <p style="color: green; font-weight: bold;"><?= htmlspecialchars($sucesso) ?></p>
+                <p style="color: green; font-weight: bold;"><?= e($sucesso) ?></p>
             <?php endif; ?>
 
             <?php if ($erro !== ''): ?>
-                <p style="color: #D9381E; font-weight: bold;"><?= htmlspecialchars($erro) ?></p>
+                <p style="color: #D9381E; font-weight: bold;"><?= e($erro) ?></p>
             <?php endif; ?>
 
             <div class="campo-input">
-                <Label for="email">Email</Label>
-                <input type="email" placeholder="nome@exemplo" maxlength="255" id="email" name="email">
+                <label for="email">Email</label>
+                <input type="email" placeholder="nome@exemplo.com" maxlength="255" id="email" name="email" value="<?= e($email) ?>">
             </div>
             <label for="senha">Senha</label>
             <div class="campo-senha">

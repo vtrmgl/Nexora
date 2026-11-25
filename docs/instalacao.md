@@ -13,11 +13,12 @@ Guia para colocar o sistema para rodar em outro computador, do zero.
 2. Copie a pasta `Nexora` para `C:\xampp\htdocs\`.
 3. Acesse http://localhost/phpmyadmin
 4. Clique em **Novo** e crie o banco `nexora`, com o agrupamento `utf8mb4_general_ci`. O nome precisa ser exatamente esse, em minúsculas.
-5. Com o banco `nexora` selecionado no menu da esquerda, vá em **Importar**, escolha o arquivo `nexora.sql` (localizado na raiz do projeto) e clique em **Importar** (ou **Executar**).
-6. Abra o arquivo `assets/php/conexao.php` e confira os dados de acesso ao banco (tabela abaixo).
-7. Acesse http://localhost/Nexora
+5. Com o banco `nexora` selecionado no menu da esquerda, vá em **Importar**, escolha o arquivo `nexora.sql` (localizado na pasta `database`) e clique em **Importar** (ou **Executar**).
+6. Clique na aba SQL no banco `nexora`, cole o conteúdo do arquivo `sprint01.sql` (na pasta `database`) e clique em **Importar** (ou **Executar**)
+7. Abra o arquivo `config/conexao.php` e confira os dados de acesso ao banco (tabela abaixo).
+8. Acesse http://localhost/Nexora
 
-## Configuração (`assets/php/conexao.php`)
+## Configuração (`config/conexao.php`)
 
 | Variável | Valor padrão no XAMPP |
 |----------|-----------------------|
@@ -34,8 +35,8 @@ O painel (`dashboard.php`) só abre para usuários autenticados que possuam uma 
 2. No phpMyAdmin, aba **SQL** do banco `nexora`, rode o comando abaixo (trocando pelo e-mail que você cadastrou):
 
 ```sql
-INSERT INTO lojas (id_usuario, nome_loja, cnpj, descricao)
-SELECT id_usuario, 'Nexora Hardware Oficial', '12345678000199', 'Loja oficial de hardware e periféricos'
+INSERT INTO lojas (id_usuario, nome, cnpj, email, descricao)
+SELECT id, 'Nexora Hardware Oficial', '12345678000199', 'loja@nexora.com', 'Loja oficial de hardware e periféricos'
 FROM usuarios
 WHERE email = 'seu@email.com';
 ```
@@ -52,7 +53,7 @@ Para testar um cliente comum, cadastre outra conta em `cadastro.php`. Ao entrar,
 
 | Erro | Causa | Solução |
 |------|-------|---------|
-| "Não foi possível conectar ao sistema" | Banco `nexora` não existe, MySQL desligado ou senha do MySQL diferente | Confira se o MySQL está com **Start** no XAMPP, se o banco foi criado (passo 4) e os dados de `assets/php/conexao.php` |
+| "Não foi possível conectar ao sistema" | Banco `nexora` não existe, MySQL desligado ou senha do MySQL diferente | Confira se o MySQL está com **Start** no XAMPP, se o banco foi criado (passo 4) e os dados de `config/conexao.php` |
 | `Table 'nexora.usuarios' doesn't exist` (ou outra tabela) | O arquivo `nexora.sql` do passo 5 não foi importado | Selecione o banco `nexora` no phpMyAdmin e execute o passo 5 |
 | Erro de `Duplicate entry` ao cadastrar | O e-mail ou CPF informado já está cadastrado na tabela `usuarios` | Use outro e-mail/CPF ou remova o registro de teste no phpMyAdmin |
 | "E-mail ou senha incorretos" | Usuário inserido manualmente no banco sem senha criptografada com `password_hash()` | Crie uma conta nova diretamente pela tela `cadastro.php` |

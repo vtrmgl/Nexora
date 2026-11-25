@@ -14,6 +14,9 @@
 11. [`mensagens`](#11-mensagens)
 12. [`favoritos`](#12-favoritos)
 13. [`itens_carrinho`](#13-itens_carrinho)
+14. [`setores`](#14-setores)
+15. [`perfis`](#15-perfis)
+16. [`auditoria_usuarios`](#16-auditoria_usuarios)
 
 ---
 
@@ -26,13 +29,20 @@
 | `email` | `varchar(255)` | Não | `unique` | E-mail do usuário |
 | `senha` | `varchar(255)` | Não | — | Senha do usuário |
 | `tipo` | `enum('Usuário', 'Administrador')` | Não | `default 'Usuário'` | Tipo do usuário |
+| `id_setor` | `int` | Não | `FK` → `setores(id)` | Identificador do setor de atuação do usuário |
+| `id_perfil` | `int` | Não | `FK` → `perfis(id)` | Identificador do perfil de acesso do usuário |
+| `status` | `enum('Ativo', 'Inativo')` | Não | `default 'Ativo'` | Indica se o usuário está ativo ou inativo |
 | `cpf` | `char(11)` | Não | `unique` | CPF do usuário |
 | `telefone` | `varchar(11)` | Não | — | Número de telefone do usuário |
 | `data_de_nascimento` | `DATE` | Não | — | Data de nascimento |
 | `foto_perfil` | `varchar(250)` | Sim | `default null` | Caminho ou URL da imagem de perfil |
 | `data_cadastro` | `datetime` | Não | `default current_timestamp` | Data e hora de criação da conta |
+| `atualizado_em` | `datetime` | Sim | `null` | Registra a data e hora da última alteração feita no usuário |
+| `desativado_em` | `datetime` | Sim | `null` | Registra a data e hora em que o usuário foi desativado |
 
-* **Cardinalidade:** `usuarios (1) : (0..1) lojas` | `usuarios (1) : (N) enderecos` | `usuarios (1) : (N) pedidos` | `usuarios (1) : (N) avaliacoes` | `usuarios (1) : (N) favoritos` | `usuarios (1) : (N) itens_carrinho`.
+* `id_setor` referencia `setores(id)` com `on update cascade`
+* `id_perfil` referencia `perfis(id)` com `on update cascade`
+* **Cardinalidade:** `usuarios (1) : (0..1) lojas` | `usuarios (1) : (N) enderecos` | `usuarios (1) : (N) pedidos` | `usuarios (1) : (N) avaliacoes` | `usuarios (1) : (N) favoritos` | `usuarios (1) : (N) itens_carrinho` | `usuarios (N) : (1) setores` | `usuarios (N) : (1) perfis` |
 
 ---
 
@@ -79,7 +89,7 @@
 | `banner` | `varchar(255)` | Sim | `default null` | Caminho da capa da página da loja |
 | `avaliacao` | `decimal(3,2)` | Sim | `default null` | Nota média da loja |
 | `data_criacao` | `datetime` | Não | `default current_timestamp` | Data e hora da criação da loja |
-| `ativa` | `boolean` | Não | `default TRUE` | Indica se a loja está ativa (`TRUE`) ou suspensa (`FALSE`). |
+| `ativa` | `enum('Ativa', 'Inativa')` | Não | `default 'Ativa'` | Indica se a loja está ativa ou inativa |
 
 * `id_usuario` referencia `usuarios(id)` com `on delete cascade` e `on update cascade`
 * **Cardinalidade:** `usuarios (1) : (0..1) lojas` | `lojas (1) : (N) produtos` | `lojas (1) : (N) itens_pedido`
@@ -121,7 +131,7 @@
 | `data_validade` | `datetime` | Não | — | Data e hora limite para utilização do cupom |
 | `limite_usos` | `int` | Sim | `default null` | Quantidade máxima de resgates |
 | `usos_atuais` | `int` | Sim | `default 0`, `CHECK (usos_atuais >= 0)` | Quantidade de vezes em que o cupom já foi utilizado |
-| `ativo` | `boolean` | Sim | `default TRUE` | Indica se o cupom está disponível |
+| `ativo` | `enum('Ativo', 'Inativo')` | Sim | `default 'Ativa'` | Indica se o cupom está ativo ou inativo |
 | `data_criacao` | `datetime` | Não | `default current_timestamp` | Data e hora da criação do cupom |
 
 * **Cardinalidade:** `cupons (1) : (N) pedidos`
@@ -139,7 +149,9 @@
 | `valor_total` | `decimal(10,2)` | Sim | `default 0`, `CHECK (valor_total >= 0)` | Valor final do pedido |
 | `data_tempo_pedido` | `datetime` | Sim | `default current_timestamp` | Data e hora em que o pedido foi registrado |
 
-* `id_usuario`, `id_endereco` e `id_cupom` utilizam `on delete set null` e `on update cascade`
+* `id_usuario` referencia `usuarios(id)` com `on delete set null` e `on update cascade`
+* `id_endereco` referencia `enderecos(id)` com `on delete set null` e `on update cascade`
+* `id_cupom` referencia `cupons(id)` com `on delete set null` e `on update cascade`
 * **Cardinalidade:** `usuarios (1) : (N) pedidos` | `enderecos (1) : (N) pedidos` | `cupons (1) : (N) pedidos` | `pedidos (1) : (N) itens_pedido` | `pedidos (1) : (N) pagamentos`
 
 ---
@@ -156,7 +168,8 @@
 | `status_produto` | `enum('Em separação', 'Enviado', 'Entregue', 'Cancelado')` | Não | `default 'Em separação'` | Estado específico do item |
 
 * `id_pedido` referencia `pedidos(id)` com `on delete cascade` e `on update cascade`
-* `id_produto` e `id_loja` utilizam `on delete set null` e `on update cascade`
+* `id_produto` referencia `produtos(id)` com `on delete set null` e `on update cascade`
+* `id_loja` referencia `lojas(id)` com `on delete set null` e `on update cascade`
 * **Cardinalidade:** `pedidos (1) : (N) itens_pedido` | `produtos (1) : (N) itens_pedido` | `lojas (1) : (N) itens_pedido`
 
 ---
@@ -216,7 +229,8 @@
 | `data_adicao` | `datetime` | Não | `default current_timestamp` | Data e hora em que o produto foi favoritado |
 
 * Chave única composta `unique (id_usuario, id_produto)` impede a duplicidade do mesmo produto nos favoritos de um mesmo usuário
-* `id_usuario` e `id_produto` utilizam `on delete cascade` e `on update cascade`
+* `id_usuario` referencia `usuarios(id)` com `on delete cascade` e `on update cascade`
+* `id_produto` referencia `produtos(id)` com `on delete cascade` e `on update cascade`
 * **Cardinalidade:** `usuarios (1) : (N) favoritos` | `produtos (1) : (N) favoritos`
 
 ---
@@ -231,5 +245,36 @@
 | `data_adicao` | `datetime` | Não | `default current_timestamp` | Data e hora da adição do produto no carrinho. |
 
 * Chave única composta `unique (id_usuario, id_produto)` impede a duplicidade do mesmo produto no carrinho de um mesmo usuário
-* `id_usuario` e `id_produto` utilizam `on delete cascade` e `on update cascade`
+* `id_usuario` referencia `usuarios(id)` com `on delete cascade` e `on update cascade`
+* `id_produto` referencia `produtos(id)` com `on delete cascade` e `on update cascade`
 * **Cardinalidade:** `usuarios (1) : (N) itens_carrinho` | `produtos (1) : (N) itens_carrinho`
+
+## 14. `setores`
+| Campo | Tipo | Nulo | Chave / Restrições | Descrição |
+| :--- | :--- | :--- | :--- | :--- |
+| `id` | `int` | Não | `PK`, `auto_increment` | Identificador do setor |
+| `nome` | `varchar(80)` | Não | `unique ` | Nome do setor |
+| `ativo` | `enum('Ativo', 'Inativo')` | Não | `default 'Ativo'` | Indica se o setor está 'Ativo' ou 'Inativo' |
+
+* **Cardinalidade:** `setores (1) : (N) usuarios`
+
+## 15. `perfis`
+| Campo | Tipo | Nulo | Chave / Restrições | Descrição |
+| :--- | :--- | :--- | :--- | :--- |
+| `id` | `int` | Não | `PK`, `auto_increment` | Identificador do perfil de acesso |
+| `nome` | `varchar(80)` | Não | `unique ` | Nome do perfil de acesso |
+| `ativo` | `enum('Ativo', 'Inativo')` | Não | `default 'Ativo'` | Indica se o perfil está 'Ativo' ou 'Inativo' |
+
+* **Cardinalidade:** `perfis (1) : (N) usuarios`
+
+## 16. `auditoria_usuarios`
+| Campo | Tipo | Nulo | Chave / Restrições | Descrição |
+| :--- | :--- | :--- | :--- | :--- |
+| `id` | `int` | Não | `PK`, `auto_increment` | Identificador do registro da auditoria |
+| `id_usuario_alvo` | `int` | Sim | - | Identificador do usuário afetado pela operação registrada |
+| `acao` | `varchar(50)` | Não | - | Tipo da operação executada |
+| `autor` | `varchar(150)` | Não | - | Identificação de quem realizou a ação registrada |
+| `data_hora` | `datetime` | Não | `default current_timestamp` | Data e hora em que a operação ocorreu |
+| `resultado` | `varchar(150)` | Não | - | Descrição resumida do resultado da operação |
+
+* **Cardinalidade:** Entidade independente

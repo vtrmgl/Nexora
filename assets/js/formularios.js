@@ -31,6 +31,8 @@ if(formCadastro){
         const sobrenome = document.getElementById('sobrenome').value.trim();
         let telefone = document.getElementById('telefone').value;
         const dataDeNascimento = document.getElementById('data-nascimento').value;
+        const setorId = document.getElementById('id_setor').value.trim();
+        const perfilId = document.getElementById('id_perfil').value.trim();
         let cpf = document.getElementById('cpf').value;
         const email = document.getElementById('email').value.trim();
         const senha = document.getElementById('senha').value;
@@ -41,7 +43,7 @@ if(formCadastro){
         const dataDeNascimentoComparacao = new Date(dataDeNascimento);
         const hoje = new Date();
 
-        if(!nome || !sobrenome || !cpf || !email || !senha || !conSenha || !dataDeNascimento || !telefone){
+        if(!nome || !sobrenome || !cpf || !email || !senha || !conSenha || !dataDeNascimento || !telefone || !setorId || !perfilId){
             event.preventDefault();
             alert('Por favor, preencha todos os campos.');
             return;

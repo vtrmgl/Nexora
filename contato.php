@@ -23,23 +23,23 @@
                     <p>vitorazevedovmpa02@gmail.com</p>
                 </div>
             </div>
-            <form class="form-contato" id="form-contato">
+            <form class="form-contato" id="form-contato" method="POST">
                 <div class="inputs-contato">
                     <div class="campo-input">
                         <label for="nome">Nome</label>
-                        <input type="text" placeholder="Fulano" maxlength="100" id="nome">
+                        <input type="text" placeholder="Fulano" maxlength="100" id="nome" name="nome">
                     </div>
                     <div class="campo-input">
                         <label for="email">Email</label>
-                        <input type="email" placeholder="nome@exemplo" maxlength="255" id="email">
+                        <input type="email" placeholder="nome@exemplo" maxlength="255" id="email" name="email">
                     </div>
                     <div class="campo-input">
                         <label for="assunto">Assunto</label>
-                        <input type="text" placeholder="Ex: Atraso na entrega" maxlength="150" id="assunto">
+                        <input type="text" placeholder="Ex: Atraso na entrega" maxlength="150" id="assunto" name="assunto">
                     </div>
                     <div class="campo-input-grande">
                         <label for="mensagem">Mensagem</label>
-                        <textarea type="text" placeholder="Explique a situação detalhadamente" id="mensagem"></textarea>
+                        <textarea type="text" placeholder="Explique a situação detalhadamente" id="mensagem" name="mensagem"></textarea>
                     </div>
                     <input type="submit" value="Enviar mensagem">
                 </div>

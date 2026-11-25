@@ -24,7 +24,7 @@
                     <h3>Categorias</h3>
                     <div class="colunas-categorias-pesquisa">
                         <ul>
-                            <li><a href="produtos.php#novidade">Novidades</a></li>
+                            <li><a href="produtos.php#novidades">Novidades</a></li>
                             <li><a href="produtos.php#ofertas">Ofertas</a></li>
                             <li><a href="produtos.php#processadores">Processadores</a></li>
                         </ul>
@@ -69,18 +69,20 @@
             </a>
             
             <?php if(usuarioEstaLogado()): ?>
-            <a href="perfil.php" title="Perfil">
-                <img src="img/person.svg" alt="Perfil" class="icone-cabecalho">
-            </a>
-            <a href="dashboard.php" title="Dashboard">
-                <img src="img/dashboard.svg" alt="Dashboard" class="icone-cabecalho">
-            </a>
-            <a href="carrinho.php" title="Carrinho">
-                <img src="img/carrinho.svg" alt="Carrinho" class="icone-cabecalho">
-            </a>
-            <a href="index.php" title="Logout">
-                <img src="img/logout.svg" alt="Logout" class="icone-cabecalho">
-            </a>
+                <a href="perfil.php" title="Perfil">
+                    <img src="img/person.svg" alt="Perfil" class="icone-cabecalho">
+                </a>
+                <?php if (usuarioPodeAcessarDashboard()): ?>
+                    <a href="dashboard.php" title="Dashboard">
+                        <img src="img/dashboard.svg" alt="Dashboard" class="icone-cabecalho">
+                    </a>
+                <?php endif; ?>
+                <a href="carrinho.php" title="Carrinho">
+                    <img src="img/carrinho.svg" alt="Carrinho" class="icone-cabecalho">
+                </a>
+                <a href="logout.php" title="Logout">
+                    <img src="img/logout.svg" alt="Logout" class="icone-cabecalho">
+                </a>
             <?php else: ?>
                 <a href="login.php" title="Login">
                     <img src="img/login.svg" alt="Login" class="icone-cabecalho">

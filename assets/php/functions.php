@@ -28,6 +28,7 @@ function iniciarSessaoSegura(): void
  */
 function usuarioEstaLogado(): bool
 {
+    iniciarSessaoSegura();
     return isset($_SESSION['usuario']);
 }
 
@@ -44,4 +45,48 @@ function redirecionar(string $pagina): void
 {
     header("Location: {$pagina}");
     exit;
+}
+
+function exigirLogin(): void
+{
+    iniciarSessaoSegura();
+    if (!usuarioEstaLogado()) {
+        redirecionar('login.php');
+    }
+}
+
+function usuarioPodeAcessarDashboard(): bool
+{
+    iniciarSessaoSegura();
+    
+    if (!usuarioEstaLogado()) {
+        return false;
+    }
+    $tipo = $_SESSION['usuario']['tipo'] ?? 'Usuário';
+    $idLoja = $_SESSION['usuario']['id_loja'] ?? null;
+
+    return ($tipo === 'Administrador' || !empty($idLoja));
+}
+
+function gerarTokenCsrf(): string
+{
+    iniciarSessaoSegura();
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+function validarTokenCsrf(?string $token): bool
+{
+    iniciarSessaoSegura();
+    if (empty($_SESSION['csrf_token']) || empty($token)) {
+        return false;
+    }
+    return hash_equals($_SESSION['csrf_token'], $token);
+}
+
+function e(?string $valor): string
+{
+    return htmlspecialchars((string)$valor, ENT_QUOTES, 'UTF-8');
 }

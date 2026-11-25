@@ -7,7 +7,7 @@ mail, cpf, telefone, data de nascimento e senha;
 - RF03: O sistema deve permitir que a loja altere o status do pedido;
 - RF04: O sistema deve mostrar o histórico de pedidos do usuário;
 - RF05: O sistema deve permitir que o usuário cadestre uma única loja vinculado ao seu perfil;
-- RF06: O sistema deve mostrar dasdos da loja no dashboard;
+- RF06: O sistema deve mostrar dados da loja no dashboard;
 - RF07: O sistema deve ter filtros de pesquisa (ordem de preço, tipo, mais comprados, etc).
 
 ## Requisitos não funcionais
@@ -21,6 +21,6 @@ mail, cpf, telefone, data de nascimento e senha;
 - RN03: Produto com estoque zero fica esgotado no catálogo.
 
 ## Histórias de usuários
-- HU01: **Como** ususário, **quero** ver o status do meu pedido, **para** saber se meu pedido já foi enviado, está em rota de entrega, etc;
+- HU01: **Como** usuário, **quero** ver o status do meu pedido, **para** saber se meu pedido já foi enviado, está em rota de entrega, etc;
 - HU02: **Como** visitante, **quero** buscar itens por palavra-chave e filtrar por categoria e preço **para** encontrar o que procuro rapidamente;
 - HU03: **Como** usuário, **quero** consultar meu histórico de pedidos **para** acompanhar entregas e repetir compras anteriores.
